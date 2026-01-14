@@ -1,55 +1,62 @@
 <!DOCTYPE html>
 <html lang="pt-BR" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Brownies artesanais no atacado em Salvador e Região. Alta saída, ótima margem de lucro e reposição rápida. Peça a tabela hoje mesmo." />
-    <title>Brownie Bahiano | Brownies no Atacado</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Fonts: Playfair Display (Headers) & Lato (Body) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-    
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Lato', 'sans-serif'],
-              serif: ['Playfair Display', 'serif'],
-            },
-            colors: {
-              brand: {
-                dark: '#1c1917', // stone-900
-                primary: '#292524', // stone-800
-                accent: '#d97706', // amber-600
-                gold: '#fbbf24', // amber-400
-                cream: '#f5f5f4', // stone-100
-              }
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Brownies artesanais no atacado em Salvador e Região. Alta saída, ótima margem de lucro e reposição rápida. Peça a tabela hoje mesmo." />
+  <title>Brownie Baiano | Brownies no Atacado</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Fonts: Playfair Display (Headers) & Lato (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@400;700&display=swap"
+    rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Lato', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          },
+          colors: {
+            brand: {
+              dark: '#1c1917', // stone-900
+              primary: '#292524', // stone-800
+              accent: '#d97706', // amber-600
+              gold: '#fbbf24', // amber-400
+              cream: '#f5f5f4', // stone-100
             }
           }
         }
       }
-    </script>
-    <style>
-      /* Custom scrollbar for webkit */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #1c1917; 
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #44403c; 
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #57534e; 
-      }
-    </style>
+    }
+  </script>
+  <style>
+    /* Custom scrollbar for webkit */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #1c1917;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #44403c;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #57534e;
+    }
+  </style>
   <script type="importmap">
 {
   "imports": {
@@ -60,10 +67,12 @@
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
+  <link rel="stylesheet" href="/index.css">
 </head>
-  <body class="bg-brand-dark text-brand-cream antialiased">
-    <div id="root"></div>
+
+<body class="bg-brand-dark text-brand-cream antialiased">
+  <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>
+
 </html>
