@@ -17,6 +17,7 @@ const Testimonials: React.FC = () => {
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(1);
   const [isMuted, setIsMuted] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -96,35 +97,58 @@ const Testimonials: React.FC = () => {
       <div className="max-w-5xl mx-auto flex flex-col items-center gap-12">
         {/* Imagens dos prints do WhatsApp (Caminho: /public/provas-sociais/) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full">
-          <div className="aspect-[9/16] relative rounded-xl overflow-hidden border border-white/10 shadow-lg bg-brand-primary">
-            <img 
-              src="/provas-sociais/whats-01.png" 
-              alt="Print do WhatsApp 1" 
-              loading="lazy"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-          </div>
-          <div className="aspect-[9/16] relative rounded-xl overflow-hidden border border-white/10 shadow-lg bg-brand-primary">
-            <img 
-              src="/provas-sociais/whats-02.jpg" 
-              alt="Print do WhatsApp 2" 
-              loading="lazy"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-          </div>
-          <div className="aspect-[9/16] relative rounded-xl overflow-hidden border border-white/10 shadow-lg bg-brand-primary sm:col-span-2 md:col-span-1 sm:w-1/2 md:w-full sm:mx-auto">
-            <img 
-              src="/provas-sociais/whats-03.jpg" 
-              alt="Print do WhatsApp 3" 
-              loading="lazy"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-          </div>
+          {[
+            { src: '/provas-sociais/whats-01.png', alt: 'Print do WhatsApp 1 completo' },
+            { src: '/provas-sociais/whats-02.jpg', alt: 'Print do WhatsApp 2 completo' },
+            { src: '/provas-sociais/whats-03.jpg', alt: 'Print do WhatsApp 3 completo' },
+          ].map((img, idx) => (
+            <div 
+              key={idx}
+              className={`ProofImgCard relative cursor-pointer group ${idx === 2 ? 'sm:col-span-2 md:col-span-1 sm:w-1/2 md:w-full sm:mx-auto' : ''}`}
+              onClick={() => setSelectedImage(img.src)}
+            >
+              <div className="ProofImgFrame">
+                <img 
+                  src={img.src} 
+                  alt={img.alt} 
+                  loading="lazy"
+                  className="ProofImg transition-transform duration-300 group-hover:scale-[1.02]"
+                />
+              </div>
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center rounded-[16px]">
+                <span className="bg-black/70 text-white px-4 py-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-medium backdrop-blur-sm">
+                  Ampliar
+                </span>
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* Player de áudio customizado */}
         <div className="w-full max-w-md">
           <style>{`
+            .ProofImgCard {
+              border: 1px solid rgba(255, 255, 255, 0.08);
+              border-radius: 16px;
+              overflow: hidden;
+              background: linear-gradient(180deg, rgba(41, 37, 36, 0.8), rgba(28, 25, 23, 0.9));
+              box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+              aspect-ratio: 9/16;
+            }
+            .ProofImgFrame {
+              width: 100%;
+              height: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              padding: 12px;
+            }
+            .ProofImg {
+              width: 100%;
+              height: 100%;
+              object-fit: contain;
+              object-position: center;
+            }
             .SocialProofAudioCard {
               border: 1px solid rgba(255, 255, 255, 0.1);
               border-radius: 16px;
@@ -343,6 +367,31 @@ const Testimonials: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Lightbox Modal */}
+      {selectedImage && (
+        <div 
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button 
+            className="absolute top-6 right-6 text-white/70 hover:text-white bg-black/50 hover:bg-black/80 rounded-full p-2 transition-all"
+            onClick={(e) => {
+              e.stopPropagation();
+              setSelectedImage(null);
+            }}
+            aria-label="Fechar"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          </button>
+          <img 
+            src={selectedImage} 
+            alt="Print ampliado" 
+            className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </Section>
   );
 };
