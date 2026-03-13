@@ -7,7 +7,7 @@ import { Benefit, Product, Testimonial, FAQItem } from './types';
 export const BRAND = {
   name: "Brownie Baiano",
   city: "Salvador e Região",
-  whatsapp: "557186208895", // Número atualizado
+  whatsapp: "5571993059366", // +55 71 99305-9366
   instagram: "@brownie_baiano",
   email: "{{EMAIL}}",
   address: "{{ENDERECO}}",
