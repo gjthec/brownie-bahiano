@@ -35,7 +35,7 @@ const Hero: React.FC = () => {
           ATACADO PARA REVENDEDORES EM {BRAND.city.toUpperCase()}
         </span>
         
-        <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-brand-cream mb-6 leading-tight drop-shadow-xl">
+        <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-brand-cream mb-6 leading-[1.18] md:leading-[1.12] max-w-3xl mx-auto">
           Brownies para revenda com <span className="text-brand-gold italic">alta saída</span> e ótima margem.
         </h1>
         
