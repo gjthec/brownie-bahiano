@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ArrowRight, ClipboardList, MessageCircle } from 'lucide-react';
 import { BRAND, WHATSAPP_MESSAGES } from '../constants';
 import Button from './Button';
+import { getDefaultLandingConfig, getLandingConfig, LandingConfig } from '../lib/firestore';
 
 const Hero: React.FC = () => {
+  const [landing, setLanding] = useState<LandingConfig>(getDefaultLandingConfig());
+
+  useEffect(() => {
+    getLandingConfig().then((data) => {
+      if (data) setLanding(data);
+    }).catch(() => {
+      // mantém fallback local
+    });
+  }, []);
+
   const handleWhatsAppClick = () => {
     const url = `https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent(WHATSAPP_MESSAGES.general)}`;
     window.open(url, '_blank');
@@ -31,15 +42,15 @@ const Hero: React.FC = () => {
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 text-center flex flex-col items-center">
         <span className="inline-block py-1 px-3 rounded-full bg-brand-gold/20 text-brand-gold border border-brand-gold/30 text-sm font-bold tracking-wider mb-6 animate-fade-in-up">
-          ATACADO PARA REVENDEDORES EM {BRAND.city.toUpperCase()}
+          {landing.hero_badge}
         </span>
 
         <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-brand-cream mb-6 leading-[1.18] md:leading-[1.12] max-w-3xl mx-auto">
-          Brownies para revenda com <span className="text-brand-gold italic">alta saída</span> e ótima margem.
+          {landing.hero_title}
         </h1>
 
         <p className="text-lg md:text-xl text-stone-200 mb-8 max-w-2xl font-light drop-shadow-md">
-          Produção própria • Receita artesanal • Reposição rápida • Vende o ano todo
+          {landing.hero_subtitle}
         </p>
 
         <img
@@ -50,10 +61,10 @@ const Hero: React.FC = () => {
 
         <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
           <Button onClick={handleWhatsAppClick} variant="whatsapp" icon={MessageCircle} className="!text-lg !px-8">
-            Quero a Tabela do Atacado
+            {landing.hero_primary_button}
           </Button>
           <Button onClick={scrollToOrderBuilder} variant="primary" icon={ClipboardList}>
-            Montar Pedido
+            {landing.hero_secondary_button}
           </Button>
           <Button onClick={scrollToProducts} variant="outline" icon={ArrowRight}>
             Ver Sabores
