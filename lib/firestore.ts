@@ -292,7 +292,17 @@ export const deleteRegion = async (id: string) => deleteDocument(`${baseStorePat
 
 export const getOrders = async () => {
   const orders = await listCollection<Order>(`${baseStorePath}/pedidos`);
-  return orders.sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
+  return orders
+    .map((order) => ({
+      ...order,
+      deliveryFee: order.deliveryFee || 0,
+      internalNotes: order.internalNotes || '',
+      totalEstimated: order.totalEstimated || (order.subtotalEstimated || 0) + (order.deliveryFee || 0),
+      statusHistory: order.statusHistory || [{ status: order.status, changedAt: order.createdAt, note: 'Registro inicial' }],
+      source: order.source || 'landing_page',
+      items: (order.items || []).map((item) => ({ ...item, imageUrl: item.imageUrl || '' })),
+    }))
+    .sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
 };
 
 export const saveOrder = async (order: Order) => {

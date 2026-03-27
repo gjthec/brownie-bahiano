@@ -62,9 +62,16 @@ export interface Flavor {
 export interface OrderItem {
   flavorId: string;
   flavorName: string;
+  imageUrl: string;
   unitPrice: number;
   quantity: number;
   lineTotal: number;
+}
+
+export interface OrderStatusHistoryItem {
+  status: OrderStatus;
+  changedAt: string;
+  note: string;
 }
 
 export interface Order {
@@ -75,12 +82,17 @@ export interface Order {
   businessType: string;
   neighborhood: string;
   deliveryType: string;
+  deliveryFee: number;
   notes: string;
+  internalNotes: string;
   items: OrderItem[];
   totalUnits: number;
   subtotalEstimated: number;
+  totalEstimated: number;
   status: OrderStatus;
+  statusHistory: OrderStatusHistoryItem[];
   whatsappMessage: string;
+  source: string;
   createdAt: string;
   updatedAt: string;
 }
