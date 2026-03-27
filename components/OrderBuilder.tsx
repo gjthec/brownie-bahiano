@@ -234,7 +234,7 @@ const OrderBuilder: React.FC<OrderBuilderProps> = ({ onTotalUnitsChange }) => {
 
             <div className="mt-4 bg-brand-gold/10 border border-brand-gold/30 rounded-lg p-3 text-xs text-stone-200 flex gap-2">
               <CircleAlert size={16} className="text-brand-gold mt-0.5" />
-              Pedido mínimo atual: {settings.minimumOrderUnits} unidades. O pedido será salvo no Firestore antes do envio para o WhatsApp.
+              Pedido mínimo atual: {settings.minimumOrderUnits} unidades.
             </div>
 
             {feedback && (
