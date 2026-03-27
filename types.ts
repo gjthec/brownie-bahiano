@@ -52,7 +52,6 @@ export interface Flavor {
   description: string;
   imageUrl: string;
   priceWholesale: number;
-  minimumByFlavor?: number;
   active: boolean;
   featured: boolean;
   sortOrder: number;
@@ -81,7 +80,7 @@ export interface Order {
   totalUnits: number;
   subtotalEstimated: number;
   status: OrderStatus;
-  statusHistory: { status: OrderStatus; timestamp: string }[];
+  whatsappMessage: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -93,6 +92,7 @@ export interface Customer {
   businessType: string;
   neighborhood: string;
   notes: string;
+  lastOrderAt: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -103,7 +103,9 @@ export interface Region {
   active: boolean;
   deliveryFee: number;
   estimatedTime: string;
-  minimumOrderRegional?: number;
+  minimumOrderUnits: number;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface Settings {
@@ -112,6 +114,5 @@ export interface Settings {
   businessHours: string;
   defaultDeliveryFee: number;
   whatsappTemplate: string;
-  operationalMessage: string;
-  adminPassword: string;
+  updatedAt: string;
 }

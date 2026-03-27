@@ -3,14 +3,16 @@ import Section from './Section';
 import { BRAND, WHATSAPP_MESSAGES } from '../constants';
 import Button from './Button';
 import { MessageCircle } from 'lucide-react';
-import { ensureSeedData, getFlavors } from '../lib/storage';
+import { getFlavors } from '../lib/firestore';
+import { Flavor } from '../types';
 
 const Products: React.FC = () => {
-  const [products, setProducts] = useState(getFlavors().filter((flavor) => flavor.active));
+  const [products, setProducts] = useState<Flavor[]>([]);
 
   useEffect(() => {
-    ensureSeedData();
-    setProducts(getFlavors().filter((flavor) => flavor.active));
+    getFlavors()
+      .then((flavors) => setProducts(flavors.filter((flavor) => flavor.active)))
+      .catch(() => setProducts([]));
   }, []);
 
   const sliderItems = useMemo(() => [...products, ...products, ...products], [products]);

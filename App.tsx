@@ -13,14 +13,17 @@ import FloatingWhatsApp from './components/FloatingWhatsApp';
 import OrderBuilder from './components/OrderBuilder';
 import MobileOrderSticky from './components/MobileOrderSticky';
 import AdminApp from './components/admin/AdminApp';
-import { ensureSeedData } from './lib/storage';
+import { ensureInitialFirestoreData } from './lib/firestore';
 
 function App() {
   const [path, setPath] = useState(window.location.pathname);
   const [totalUnits, setTotalUnits] = useState(0);
 
   useEffect(() => {
-    ensureSeedData();
+    ensureInitialFirestoreData().catch(() => {
+      // O site segue funcional mesmo se a base estiver indisponível no momento.
+    });
+
     const onPopState = () => setPath(window.location.pathname);
     window.addEventListener('popstate', onPopState);
     return () => window.removeEventListener('popstate', onPopState);
